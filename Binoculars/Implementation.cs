@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 
+using ModComponentAPI;
 using ModComponentMapper;
 
 namespace Binoculars
 {
     public class Implementation
     {
-        public GameObject GameObject;
+        public ModComponent ModComponent;
         private GameObject equippedModel;
 
         private float originalFOV;
@@ -18,11 +19,6 @@ namespace Binoculars
 
             ShowEquippedModel();
             ShowButtonPopups();
-        }
-
-        public void OnUse()
-        {
-            GameManager.GetPlayerManagerComponent().EquipItem(this.GameObject.GetComponent<GearItem>(), false);
         }
 
         public void OnUnequipped()
