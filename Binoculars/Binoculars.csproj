@@ -31,19 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>E:\Steam\SteamApps\common\TheLongDark\tld_Data\Managed\Assembly-CSharp.dll</HintPath>
-    </Reference>
+    <Reference Include="Assembly-CSharp" />
     <Reference Include="AssetLoader, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="Harmony, Version=1.0.9.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\Steam\SteamApps\common\TheLongDark\tld_Data\Managed\Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="ModComponentAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="ModComponentMapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="UnityEngine">
-      <HintPath>E:\Steam\SteamApps\common\TheLongDark\tld_Data\Managed\UnityEngine.dll</HintPath>
-    </Reference>
+    <Reference Include="Harmony" />
+    <Reference Include="ModComponentAPI, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="ModComponentMapper, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="UnityEngine" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation.cs" />
