@@ -15,16 +15,12 @@ namespace Binoculars
 
         public void OnEquipped()
         {
-            InterfaceManager.QuitCurrentScreens();
-
-            ShowEquippedModel();
             ShowButtonPopups();
         }
 
         public void OnUnequipped()
         {
             EndZoom();
-            HideEquippedModel();
         }
 
         public void OnControlModeChangedWhileEquipped()
@@ -49,6 +45,7 @@ namespace Binoculars
             ModUtils.FreezePlayer();
             ZoomCamera();
             ShowOverlay();
+            GameManager.GetWeaponCamera().gameObject.SetActive(false);
         }
 
         private void EndZoom()
@@ -61,6 +58,7 @@ namespace Binoculars
             ModUtils.UnfreezePlayer();
             RestoreCamera();
             HideOverlay();
+            GameManager.GetWeaponCamera().gameObject.SetActive(true);
         }
 
         private void ZoomCamera()

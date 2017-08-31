@@ -13,7 +13,7 @@ namespace Binoculars
 
         public static void OnLoad()
         {
-            ModAssetBundleManager.RegisterAssetBundle("binoculars");
+            ModAssetBundleManager.RegisterAssetBundle("binoculars.unity3d");
 
             ModUtils.RegisterConsoleGearName(DISPLAY_NAME_BINOCULARS, PREFAB_BINOCULARS);
             ModUtils.InsertIntoLootTable("LootTableSafe", (GameObject)Resources.Load(PREFAB_BINOCULARS), 2);
