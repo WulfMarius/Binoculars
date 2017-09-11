@@ -16,7 +16,7 @@ namespace Binoculars
             ModAssetBundleManager.RegisterAssetBundle("binoculars.unity3d");
 
             ModUtils.RegisterConsoleGearName(DISPLAY_NAME_BINOCULARS, PREFAB_BINOCULARS);
-            ModUtils.InsertIntoLootTable("LootTableSafe", (GameObject)Resources.Load(PREFAB_BINOCULARS), 2);
+            ModUtils.InsertIntoLootTable(LootTableName.LootTableSafe, (GameObject)Resources.Load(PREFAB_BINOCULARS), 2);
 
             GearSpawnInfo gearSpawnInfo = new GearSpawnInfo();
             gearSpawnInfo.PrefabName = PREFAB_BINOCULARS;

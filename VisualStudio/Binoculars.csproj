@@ -32,10 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp" />
-    <Reference Include="AssetLoader, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="AssetLoader, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Harmony" />
-    <Reference Include="ModComponentAPI, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="ModComponentMapper, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="ModComponentAPI, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="ModComponentMapper, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="UnityEngine" />
   </ItemGroup>
   <ItemGroup>
@@ -45,8 +45,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>cmd /C IF DEFINED TLD_MOD_DIR copy "$(TargetPath)" %25TLD_MOD_DIR%25</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
