@@ -7,7 +7,6 @@ namespace Binoculars
 {
     public class Implementation
     {
-        public ModComponent ModComponent;
         private GameObject equippedModel;
 
         private float originalFOV;
