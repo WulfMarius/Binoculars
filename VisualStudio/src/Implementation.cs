@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-
-using ModComponentAPI;
-using ModComponentMapper;
+﻿using ModComponentMapper;
+using UnityEngine;
 
 namespace Binoculars
 {
