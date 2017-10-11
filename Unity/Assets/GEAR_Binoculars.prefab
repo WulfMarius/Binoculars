@@ -38,6 +38,11 @@ GameObject:
   - component: {fileID: 4939104295916964}
   - component: {fileID: 65687111535439820}
   - component: {fileID: 114400108379567992}
+  - component: {fileID: 114350903968384468}
+  - component: {fileID: 114603477446365064}
+  - component: {fileID: 114811017564158426}
+  - component: {fileID: 114544816648077410}
+  - component: {fileID: 114166485741608676}
   m_Layer: 17
   m_Name: GEAR_Binoculars
   m_TagString: Untagged
@@ -267,6 +272,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.09, z: 0.25}
   m_Center: {x: 0.02, y: 0.04, z: 0}
+--- !u!114 &114166485741608676
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157080692758088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2078933988, guid: cf5f2c8efb027b3428c08def532eea40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scene: 15
+  Position: {x: 356.33142, y: 203.8271, z: 1155.2589}
+  Rotation: {x: 0.6691106, y: 176.41304, z: 2.461024}
+  SpawnChance: 90
+--- !u!114 &114350903968384468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157080692758088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1916184789, guid: cf5f2c8efb027b3428c08def532eea40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LootTable: 56
+  Weight: 2
 --- !u!114 &114400108379567992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,21 +311,67 @@ MonoBehaviour:
   m_Script: {fileID: 1344635434, guid: cf5f2c8efb027b3428c08def532eea40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ConsoleName: 
   DisplayNameLocalizationId: GAMEPLAY_Binoculars
   DescriptionLocalizatonId: GAMEPLAY_BinocularsDescription
   InventoryActionLocalizationId: 
-  WeightKG: 1
-  MaxHP: 100
-  DaysToDecay: 0
   PickUpAudio: Play_DrawRifle
   StowAudio: Play_InventoryStow
   PutBackAudio: Play_DrawRifle
   WornOutAudio: 
+  WeightKG: 1
+  MaxHP: 100
+  DaysToDecay: 0
   InspectOnPickup: 1
-  InspectDistance: 0.5
+  InspectDistance: 0.4
   InspectScale: {x: 1, y: 1, z: 1}
   InspectAngles: {x: -15, y: 60, z: -25}
   InspectOffset: {x: 0, y: 0, z: 0}
   EquippedModelPrefab: {fileID: 1382427455616702, guid: 5e19ed2ac6c869a44aafc68f97100c11,
     type: 2}
   ImplementationType: Binoculars.Implementation,Binoculars
+--- !u!114 &114544816648077410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157080692758088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2078933988, guid: cf5f2c8efb027b3428c08def532eea40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scene: 83
+  Position: {x: -0.9688107, y: 1.0214336, z: 4.122903}
+  Rotation: {x: 0, y: 50.211693, z: 0}
+  SpawnChance: 100
+--- !u!114 &114603477446365064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157080692758088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2078933988, guid: cf5f2c8efb027b3428c08def532eea40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scene: 17
+  Position: {x: 886.9839, y: 161.50587, z: 345.04626}
+  Rotation: {x: 0, y: 57.643402, z: 0}
+  SpawnChance: 90
+--- !u!114 &114811017564158426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157080692758088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2078933988, guid: cf5f2c8efb027b3428c08def532eea40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scene: 79
+  Position: {x: 1.7377198, y: 1.513701, z: 0.16954264}
+  Rotation: {x: 0, y: 185.93732, z: 0}
+  SpawnChance: 90
