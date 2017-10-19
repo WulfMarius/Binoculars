@@ -319,7 +319,7 @@ MonoBehaviour:
   StowAudio: Play_InventoryStow
   PutBackAudio: Play_DrawRifle
   WornOutAudio: 
-  WeightKG: 1
+  WeightKG: 0.8
   MaxHP: 100
   DaysToDecay: 0
   InspectOnPickup: 1

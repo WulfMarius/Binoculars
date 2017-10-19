@@ -1,4 +1,5 @@
-﻿using ModComponentMapper;
+﻿using Harmony;
+using System.Reflection;
 using UnityEngine;
 
 namespace Binoculars
@@ -10,19 +11,41 @@ namespace Binoculars
         private float originalFOV;
         private UITexture texture;
 
-        public void OnEquipped()
+        public static void ShowItemPopups(string primaryAction, string secondaryAction, bool showAmmo, bool showDuration, bool showReload, bool showHolster)
         {
-            ShowButtonPopups();
-        }
+            EquipItemPopup equipItemPopup = InterfaceManager.m_Panel_HUD.m_EquipItemPopup;
+            ShowItemIcons(equipItemPopup, primaryAction, secondaryAction, showAmmo, showDuration);
 
-        public void OnUnequipped()
-        {
-            EndZoom();
+            if (Utils.IsGamepadActive())
+            {
+                equipItemPopup.m_ButtonPromptFire.ShowPromptForKey(primaryAction, "Fire");
+                MaybeRepositionFireButtonPrompt(equipItemPopup, secondaryAction);
+                equipItemPopup.m_ButtonPromptAltFire.ShowPromptForKey(secondaryAction, "AltFire");
+                MaybeRepositionAltFireButtonPrompt(equipItemPopup, primaryAction);
+            }
+            else
+            {
+                equipItemPopup.m_ButtonPromptFire.ShowPromptForKey(secondaryAction, "AltFire");
+                MaybeRepositionFireButtonPrompt(equipItemPopup, primaryAction);
+                equipItemPopup.m_ButtonPromptAltFire.ShowPromptForKey(primaryAction, "Interact");
+                MaybeRepositionAltFireButtonPrompt(equipItemPopup, secondaryAction);
+            }
+
+            string reloadText = showReload ? Localization.Get("GAMEPLAY_Reload") : string.Empty;
+            equipItemPopup.m_ButtonPromptReload.ShowPromptForKey(reloadText, "Reload");
+
+            string holsterText = showHolster ? Localization.Get("GAMEPLAY_HolsterPrompt") : string.Empty;
+            equipItemPopup.m_ButtonPromptHolster.ShowPromptForKey(holsterText, "Holster");
         }
 
         public void OnControlModeChangedWhileEquipped()
         {
             EndZoom();
+        }
+
+        public void OnEquipped()
+        {
+            ShowButtonPopups();
         }
 
         public void OnSecondaryAction()
@@ -37,12 +60,72 @@ namespace Binoculars
             }
         }
 
-        private void StartZoom()
+        public void OnUnequipped()
         {
-            ModUtils.FreezePlayer();
-            ZoomCamera();
-            ShowOverlay();
-            GameManager.GetWeaponCamera().gameObject.SetActive(false);
+            EndZoom();
+        }
+
+        private static UITexture CreateOverlay(Texture2D texture)
+        {
+            UIRoot root = UIRoot.list[0];
+            UIPanel panel = NGUITools.AddChild<UIPanel>(root.gameObject);
+
+            UITexture result = NGUITools.AddChild<UITexture>(panel.gameObject);
+            result.mainTexture = texture;
+
+            Vector2 windowSize = panel.GetWindowSize();
+            result.width = (int)windowSize.x;
+            result.height = (int)windowSize.y;
+
+            return result;
+        }
+
+        private static void ExecuteMethod(object instance, string methodName, params object[] parameters)
+        {
+            MethodInfo methodInfo = AccessTools.Method(instance.GetType(), methodName, AccessTools.GetTypes(parameters));
+            methodInfo.Invoke(instance, parameters);
+        }
+
+        private static void FreezePlayer()
+        {
+            GameManager.GetVpFPSPlayer().Controller.m_Controller.SimpleMove(Vector3.zero);
+            GameManager.GetPlayerManagerComponent().DisableCharacterController();
+        }
+
+        private static T GetFieldValue<T>(object target, string fieldName)
+        {
+            FieldInfo fieldInfo = AccessTools.Field(target.GetType(), fieldName);
+            if (fieldInfo != null)
+            {
+                return (T)fieldInfo.GetValue(target);
+            }
+
+            return default(T);
+        }
+
+        private static void MaybeRepositionAltFireButtonPrompt(EquipItemPopup __instance, string otherAction)
+        {
+            ExecuteMethod(__instance, "MaybeRepositionAltFireButtonPrompt", new object[] { otherAction, });
+        }
+
+        private static void MaybeRepositionFireButtonPrompt(EquipItemPopup equipItemPopup, string otherAction)
+        {
+            ExecuteMethod(equipItemPopup, "MaybeRepositionFireButtonPrompt", new object[] { otherAction, });
+        }
+
+        private static void ShowButtonPopups()
+        {
+            ShowItemPopups(string.Empty, Localization.Get("GAMEPLAY_Use"), false, false, false, true);
+        }
+
+        private static void ShowItemIcons(EquipItemPopup equipItemPopup, string primaryAction, string secondaryAction, bool showAmmo, bool showDuration)
+        {
+            ExecuteMethod(equipItemPopup, "ShowItemIcons", new object[] { primaryAction, secondaryAction, showAmmo, showDuration });
+        }
+
+        private static void UnfreezePlayer()
+        {
+            GameManager.GetPlayerManagerComponent().EnableCharacterController();
         }
 
         private void EndZoom()
@@ -52,18 +135,32 @@ namespace Binoculars
                 return;
             }
 
-            ModUtils.UnfreezePlayer();
+            UnfreezePlayer();
             RestoreCamera();
             HideOverlay();
             GameManager.GetWeaponCamera().gameObject.SetActive(true);
         }
 
-        private void ZoomCamera()
+        private void HideEquippedModel()
         {
-            vp_FPSCamera camera = GameManager.GetVpFPSCamera();
-            originalFOV = ModUtils.GetFieldValue<float>(camera, "m_RenderingFieldOfView");
-            camera.ToggleZoom(true);
-            camera.SetFOVFromOptions(originalFOV * 0.1f);
+            if (equippedModel == null)
+            {
+                return;
+            }
+
+            Object.Destroy(equippedModel);
+            equippedModel = null;
+        }
+
+        private void HideOverlay()
+        {
+            if (texture == null)
+            {
+                return;
+            }
+
+            Object.Destroy(texture);
+            texture = null;
         }
 
         private void RestoreCamera()
@@ -83,36 +180,25 @@ namespace Binoculars
             this.equippedModel.transform.localRotation = Quaternion.Euler(0, -90, -60);
         }
 
-        private void HideEquippedModel()
-        {
-            if (equippedModel == null)
-            {
-                return;
-            }
-
-            Object.Destroy(equippedModel);
-            equippedModel = null;
-        }
-
         private void ShowOverlay()
         {
-            texture = UIUtils.CreateOverlay((Texture2D)Resources.Load("Binoculars_Overlay"));
+            texture = CreateOverlay((Texture2D)Resources.Load("Binoculars_Overlay"));
         }
 
-        private void HideOverlay()
+        private void StartZoom()
         {
-            if (texture == null)
-            {
-                return;
-            }
-
-            Object.Destroy(texture);
-            texture = null;
+            FreezePlayer();
+            ZoomCamera();
+            ShowOverlay();
+            GameManager.GetWeaponCamera().gameObject.SetActive(false);
         }
 
-        private static void ShowButtonPopups()
+        private void ZoomCamera()
         {
-            EquipItemPopupUtils.ShowItemPopups(string.Empty, Localization.Get("GAMEPLAY_Use"), false, false, false, true);
+            vp_FPSCamera camera = GameManager.GetVpFPSCamera();
+            originalFOV = GetFieldValue<float>(camera, "m_RenderingFieldOfView");
+            camera.ToggleZoom(true);
+            camera.SetFOVFromOptions(originalFOV * 0.1f);
         }
     }
 }

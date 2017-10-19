@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp" />
-    <Reference Include="ModComponentMapper, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Harmony" />
     <Reference Include="UnityEngine" />
   </ItemGroup>
   <ItemGroup>
