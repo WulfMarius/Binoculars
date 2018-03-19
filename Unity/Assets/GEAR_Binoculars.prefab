@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConsoleName: 
+  Radial: 3
   DisplayNameLocalizationId: GAMEPLAY_Binoculars
   DescriptionLocalizatonId: GAMEPLAY_BinocularsDescription
   InventoryActionLocalizationId: 
