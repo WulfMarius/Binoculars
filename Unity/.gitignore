@@ -1,5 +1,7 @@
+.vs
 Library
 Temp
 AssetBundles
-.vs
 UnityPackageManager
+Unity.Editor.csproj
+Unity.sln
