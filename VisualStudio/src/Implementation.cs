@@ -37,7 +37,7 @@ namespace Binoculars
 
         private static void ShowButtonPopups()
         {
-            EquipItemPopupUtils.ShowItemPopups(string.Empty, Localization.Get("GAMEPLAY_Use"), false, false, false, true);
+            EquipItemPopupUtils.ShowItemPopups(string.Empty, Localization.Get("GAMEPLAY_Use"), false, false, true);
         }
 
         private void EndZoom()

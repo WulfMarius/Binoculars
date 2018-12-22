@@ -144,7 +144,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -180,7 +180,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -216,7 +216,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -289,6 +289,7 @@ MonoBehaviour:
   Radial: 3
   DisplayNameLocalizationId: GAMEPLAY_Binoculars
   DescriptionLocalizatonId: GAMEPLAY_BinocularsDescription
+  InventoryCategory: 0
   InventoryActionLocalizationId: 
   PickUpAudio: Play_DrawRifle
   StowAudio: Play_InventoryStow
@@ -297,16 +298,45 @@ MonoBehaviour:
   WeightKG: 0.8
   MaxHP: 100
   DaysToDecay: 0
+  InitialCondition: 0
   InspectOnPickup: 1
   InspectDistance: 0.4
   InspectScale: {x: 1, y: 1, z: 1}
   InspectAngles: {x: -15, y: 60, z: -25}
   InspectOffset: {x: 0, y: 0, z: 0}
+  InspectModel: {fileID: 0}
+  NormalModel: {fileID: 0}
   EquippedModelPrefab: {fileID: 1382427455616702, guid: 5e19ed2ac6c869a44aafc68f97100c11,
     type: 2}
   ImplementationType: Binoculars.Implementation,Binoculars
   EquippingAudio: Play_DrawRifle
   EquippedModel: {fileID: 0}
+  ToolType: 0
+  DegradeOnUse: 0
+  Usage: 0
+  SkillBonus: 0
+  CraftingTimeMultiplier: 1
+  DegradePerHourCrafting: 0
+  BreakDown: 0
+  BreakDownTimeMultiplier: 1
+  ForceLocks: 0
+  ForceLockAudio: 
+  IceFishingHole: 0
+  IceFishingHoleDegradeOnUse: 0
+  IceFishingHoleMinutes: 0
+  IceFishingHoleAudio: 
+  CarcassHarvesting: 0
+  MinutesPerKgMeat: 0
+  MinutesPerKgFrozenMeat: 0
+  MinutesPerHide: 0
+  MinutesPerGut: 0
+  DegradePerHourHarvesting: 0
+  StruggleBonus: 0
+  DamageMultiplier: 1
+  FleeChanceMultiplier: 1
+  TapMultiplier: 1
+  CanPuncture: 0
+  BleedoutMultiplier: 1
 --- !u!114 &114859399428153398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,3 +355,4 @@ MonoBehaviour:
   NumberOfUses: 0
   RequiresSunLight: 1
   OnUseSoundEvent: 
+  RuinedAfterUse: 0
